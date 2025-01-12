@@ -1,0 +1,30 @@
+---
+- name: Update web servers
+# connection cmd:
+# ssh -i /Users/matthewjordan/.ssh/AWS-EC2.pem matt@18.118.167.163
+# password: B00gnish
+  hosts: 18.118.167.163 
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/AWS-EC2.pem
+  remote_user: matt
+  become: true
+
+  tasks:
+  - name: Remove Repo
+    ansible.builtin.file:
+      path: /etc/django/
+      state: absent
+
+  # - name: create new file
+  #   ansible.builtin.file:
+  #     name: /etc/django/foo.txt
+  #     state: touch
+  #     mode: u=rw,g=r,o=r
+  
+  - name: Clone Repo
+    ansible.builtin.git:
+      repo: git@github.com:MattisTrees/aggregator.git
+      dest: /etc/django/
+      single_branch: yes
+      version: main
+      key_file: /home/matt/.ssh/id_ed25519
