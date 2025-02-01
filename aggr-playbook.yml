@@ -1,4 +1,10 @@
 ---
+# This playbook assumes the following is already installed on the server:
+#   - python3.12
+#   - pip3
+#     - sudo apt install python3-pip
+#   - django
+#     - sudo apt install python3-django
 - name: Update web servers
   hosts: aws
   remote_user: matt
