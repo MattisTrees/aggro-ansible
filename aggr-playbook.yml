@@ -18,7 +18,7 @@
   
   - name: Clone Repo
     ansible.builtin.git:
-      repo: git@github.com:MattisTrees/aggregator.git
+      repo: git@github.com:MattisTrees/aggro-site.git
       dest: /etc/django/
       single_branch: yes
       version: main
