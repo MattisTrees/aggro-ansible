@@ -1,25 +1,30 @@
 ---
 # This playbook assumes the following is already installed on the server:
-#   - python3.12
+#   - python3.12+ (not sure if 12 is required, at least 9)
 #   - pip3
 #     - sudo apt install python3-pip
 #   - django
 #     - sudo apt install python3-django
+#   - sqlite3
+#     - sudo apt install sqlite3
+
 - name: Update web servers
   hosts: aws
   remote_user: matt
   become: true
 
   tasks:
-  - name: Remove Repo
-    ansible.builtin.file:
-      path: /etc/django/
-      state: absent
+  # - name: Remove Repo
+  #   ansible.builtin.file:
+  #     path: /etc/django/agrro-site
+  #     state: absent
   
   - name: Clone Repo
     ansible.builtin.git:
       repo: git@github.com:MattisTrees/aggro-site.git
-      dest: /etc/django/
+      dest: /etc/django/aggro-site
       single_branch: yes
       version: main
       key_file: /home/matt/.ssh/id_ed25519
+
+  # TODO: ensure all files and folders inside the project are owned by matt user
